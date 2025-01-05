@@ -153,50 +153,50 @@ object BehaviorBindings : BehaviorLoader.AppBehaviorLoader {
             simpleName = "CharacterCameraRig",
             qualifiedName = "de.fabmax.kool.app.CharacterCameraRig",
             properties = listOf(
-                BehaviorProperty("trackedCharacter", BehaviorPropertyType.COMPONENT, typeOf<de.fabmax.kool.editor.components.CharacterControllerComponent?>(), "Character:"),
-                BehaviorProperty("camera", BehaviorPropertyType.COMPONENT, typeOf<de.fabmax.kool.editor.components.CameraComponent?>(), "Camera:"),
-                BehaviorProperty("pivotPoint", BehaviorPropertyType.STD, typeOf<de.fabmax.kool.math.Vec3f>(), "Pivot point:"),
-                BehaviorProperty("isObstacleAware", BehaviorPropertyType.STD, typeOf<Boolean>(), "Obstacle aware camera:"),
+                BehaviorProperty("trackedCharacter", BehaviorPropertyType.COMPONENT, typeOf<de.fabmax.kool.editor.components.CharacterControllerComponent?>(), "Character:", precision = 0),
+                BehaviorProperty("camera", BehaviorPropertyType.COMPONENT, typeOf<de.fabmax.kool.editor.components.CameraComponent?>(), "Camera:", precision = 0),
+                BehaviorProperty("pivotPoint", BehaviorPropertyType.STD, typeOf<de.fabmax.kool.math.Vec3f>(), "Pivot point:", precision = 0),
+                BehaviorProperty("isObstacleAware", BehaviorPropertyType.STD, typeOf<Boolean>(), "Obstacle aware camera:", precision = 0),
             )
         ),
         OrbitCameraRig::class to AppBehavior(
             simpleName = "OrbitCameraRig",
             qualifiedName = "de.fabmax.kool.app.OrbitCameraRig",
             properties = listOf(
-                BehaviorProperty("camera", BehaviorPropertyType.COMPONENT, typeOf<de.fabmax.kool.editor.components.CameraComponent?>(), "Camera:"),
-                BehaviorProperty("zoom", BehaviorPropertyType.STD, typeOf<Double>(), "Zoom:", min = Vec4d(0.1, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY), max = Vec4d(0.1, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY)),
-                BehaviorProperty("minZoom", BehaviorPropertyType.STD, typeOf<Double>(), "Min zoom:", min = Vec4d(0.1, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY), max = Vec4d(0.1, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY)),
-                BehaviorProperty("maxZoom", BehaviorPropertyType.STD, typeOf<Double>(), "Max zoom:", min = Vec4d(0.1, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY), max = Vec4d(0.1, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY)),
-                BehaviorProperty("initYaw", BehaviorPropertyType.STD, typeOf<Double>(), "Yaw:", min = Vec4d(-180.0, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY), max = Vec4d(-180.0, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY)),
-                BehaviorProperty("initPitch", BehaviorPropertyType.STD, typeOf<Double>(), "Pitch:", min = Vec4d(-90.0, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY), max = Vec4d(-90.0, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY)),
-                BehaviorProperty("minPitch", BehaviorPropertyType.STD, typeOf<Double>(), "Min pitch:", min = Vec4d(-90.0, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY), max = Vec4d(-90.0, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY)),
-                BehaviorProperty("maxPitch", BehaviorPropertyType.STD, typeOf<Double>(), "Max pitch:", min = Vec4d(-90.0, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY), max = Vec4d(-90.0, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY)),
+                BehaviorProperty("camera", BehaviorPropertyType.COMPONENT, typeOf<de.fabmax.kool.editor.components.CameraComponent?>(), "Camera:", precision = 0),
+                BehaviorProperty("zoom", BehaviorPropertyType.STD, typeOf<Double>(), "Zoom:", min = Vec4d(0.1, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY), max = Vec4d(0.1, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY), precision = 0),
+                BehaviorProperty("minZoom", BehaviorPropertyType.STD, typeOf<Double>(), "Min zoom:", min = Vec4d(0.1, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY), max = Vec4d(0.1, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY), precision = 0),
+                BehaviorProperty("maxZoom", BehaviorPropertyType.STD, typeOf<Double>(), "Max zoom:", min = Vec4d(0.1, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY), max = Vec4d(0.1, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY), precision = 0),
+                BehaviorProperty("initYaw", BehaviorPropertyType.STD, typeOf<Double>(), "Yaw:", min = Vec4d(-180.0, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY), max = Vec4d(-180.0, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY), precision = 0),
+                BehaviorProperty("initPitch", BehaviorPropertyType.STD, typeOf<Double>(), "Pitch:", min = Vec4d(-90.0, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY), max = Vec4d(-90.0, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY), precision = 0),
+                BehaviorProperty("minPitch", BehaviorPropertyType.STD, typeOf<Double>(), "Min pitch:", min = Vec4d(-90.0, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY), max = Vec4d(-90.0, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY), precision = 0),
+                BehaviorProperty("maxPitch", BehaviorPropertyType.STD, typeOf<Double>(), "Max pitch:", min = Vec4d(-90.0, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY), max = Vec4d(-90.0, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY), precision = 0),
             )
         ),
         PlatformMoveController::class to AppBehavior(
             simpleName = "PlatformMoveController",
             qualifiedName = "de.fabmax.kool.app.PlatformMoveController",
             properties = listOf(
-                BehaviorProperty("anchorA", BehaviorPropertyType.STD, typeOf<de.fabmax.kool.editor.api.GameEntity?>(), "Start anchor:"),
-                BehaviorProperty("anchorB", BehaviorPropertyType.STD, typeOf<de.fabmax.kool.editor.api.GameEntity?>(), "End anchor:"),
-                BehaviorProperty("trigger", BehaviorPropertyType.BEHAVIOR, typeOf<de.fabmax.kool.app.TriggerHandler?>(), "Trigger:"),
-                BehaviorProperty("speed", BehaviorPropertyType.STD, typeOf<Float>(), "Movement speed:"),
+                BehaviorProperty("anchorA", BehaviorPropertyType.STD, typeOf<de.fabmax.kool.editor.api.GameEntity?>(), "Start anchor:", precision = 0),
+                BehaviorProperty("anchorB", BehaviorPropertyType.STD, typeOf<de.fabmax.kool.editor.api.GameEntity?>(), "End anchor:", precision = 0),
+                BehaviorProperty("trigger", BehaviorPropertyType.BEHAVIOR, typeOf<de.fabmax.kool.app.TriggerHandler?>(), "Trigger:", precision = 0),
+                BehaviorProperty("speed", BehaviorPropertyType.STD, typeOf<Float>(), "Movement speed:", precision = 0),
             )
         ),
         PlayerAnimationController::class to AppBehavior(
             simpleName = "PlayerAnimationController",
             qualifiedName = "de.fabmax.kool.app.PlayerAnimationController",
             properties = listOf(
-                BehaviorProperty("character", BehaviorPropertyType.COMPONENT, typeOf<de.fabmax.kool.editor.components.CharacterControllerComponent?>(), "Character"),
+                BehaviorProperty("character", BehaviorPropertyType.COMPONENT, typeOf<de.fabmax.kool.editor.components.CharacterControllerComponent?>(), "Character", precision = 0),
             )
         ),
         TriggerHandler::class to AppBehavior(
             simpleName = "TriggerHandler",
             qualifiedName = "de.fabmax.kool.app.TriggerHandler",
             properties = listOf(
-                BehaviorProperty("materialNameFilter", BehaviorPropertyType.STD, typeOf<String>(), "Material name:"),
-                BehaviorProperty("rotationSpeedIdle", BehaviorPropertyType.STD, typeOf<Float>(), "Idle speed:"),
-                BehaviorProperty("rotationSpeedActive", BehaviorPropertyType.STD, typeOf<Float>(), "Active speed:"),
+                BehaviorProperty("materialNameFilter", BehaviorPropertyType.STD, typeOf<String>(), "Material name:", precision = 0),
+                BehaviorProperty("rotationSpeedIdle", BehaviorPropertyType.STD, typeOf<Float>(), "Idle speed:", precision = 0),
+                BehaviorProperty("rotationSpeedActive", BehaviorPropertyType.STD, typeOf<Float>(), "Active speed:", precision = 0),
             )
         ),
     )

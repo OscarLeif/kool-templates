@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalDistributionDsl
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
 plugins {
-    kotlin("multiplatform") version "2.0.0"
+    kotlin("multiplatform") version "2.1.0"
 }
 
 repositories {
@@ -36,9 +36,9 @@ kotlin {
     }
 
     sourceSets {
-        val koolVersion = "0.16.0-SNAPSHOT"
-        val lwjglVersion = "3.3.4"
-        val physxJniVersion = "2.4.0"
+        val koolVersion = "0.16.0"
+        val lwjglVersion = "3.3.5"
+        val physxJniVersion = "2.5.0"
 
         // JVM target platforms, you can remove entries from the list in case you want to target
         // only a specific platform
@@ -47,12 +47,6 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation("de.fabmax.kool:kool-editor-model:$koolVersion")
-            }
-        }
-        val commonTest by getting {
-            dependencies {
-                implementation(kotlin("test-common"))
-                implementation(kotlin("test-annotations-common"))
             }
         }
 
@@ -113,7 +107,7 @@ task("runEditor", JavaExec::class) {
     classpath = layout.buildDirectory.files("classes/kotlin/jvm/editor")
     configurations
         .filter { it.name.startsWith("common") || it.name.startsWith("jvm") }
-        .map { it.copyRecursive().fileCollection { true } }
+        .map { it.copyRecursive().filter { true } }
         .forEach { classpath += it }
 
     mainClass.set("EditorLauncherKt")
@@ -130,7 +124,7 @@ task("runApp", JavaExec::class) {
     classpath = layout.buildDirectory.files("classes/kotlin/jvm/main")
     configurations
         .filter { it.name.startsWith("common") || it.name.startsWith("jvm") }
-        .map { it.copyRecursive().fileCollection { true } }
+        .map { it.copyRecursive().filter { true } }
         .forEach { classpath += it }
 
     mainClass.set("de.fabmax.kool.app.AppLauncherKt")

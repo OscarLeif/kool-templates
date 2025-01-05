@@ -205,19 +205,19 @@
                 "type": "de.fabmax.kool.editor.data.TransformComponentData",
                 "transform": {
                   "position": {
-                    "x": 1.6093250039261689E-7,
-                    "y": -5.364415822661783E-8,
+                    "x": 1.6093250110316148E-7,
+                    "y": -5.364415756048402E-8,
                     "z": 6.460483551025391
                   },
                   "rotation": {
                     "x": 0.0,
                     "y": 0.0,
-                    "z": 8.940696538672877E-8,
-                    "w": 0.999999999999996
+                    "z": 8.940696716308594E-8,
+                    "w": 1.0
                   },
                   "scale": {
-                    "x": 1.0000000596046537,
-                    "y": 1.0000000596046537,
+                    "x": 1.0000001192092896,
+                    "y": 1.0000001192092896,
                     "z": 1.0
                   }
                 }
@@ -908,7 +908,7 @@
                   },
                   "rotation": {
                     "x": -2.134799139969307E-17,
-                    "y": 6.6174449004242214E-24,
+                    "y": 6.617444900424222E-24,
                     "z": 2.1093106882279654E-22,
                     "w": 1.0
                   },
@@ -1151,7 +1151,7 @@
                   },
                   "rotation": {
                     "x": -2.1347938460133867E-17,
-                    "y": 6.6174449004242214E-24,
+                    "y": 6.617444900424222E-24,
                     "z": -2.481541837659083E-24,
                     "w": 1.0
                   },
@@ -3042,33 +3042,7 @@
             "type": "de.fabmax.kool.editor.data.MaterialComponentData",
             "name": "<\\Default/>",
             "shaderData": {
-              "type": "de.fabmax.kool.editor.data.PbrShaderData",
-              "baseColor": {
-                "type": "de.fabmax.kool.editor.data.ConstColorAttribute",
-                "color": {
-                  "r": 0.3488648,
-                  "g": 0.3488648,
-                  "b": 0.3488648,
-                  "a": 1.0
-                }
-              },
-              "roughness": {
-                "type": "de.fabmax.kool.editor.data.ConstValueAttribute",
-                "value": 0.5
-              },
-              "metallic": {
-                "type": "de.fabmax.kool.editor.data.ConstValueAttribute",
-                "value": 0.0
-              },
-              "emission": {
-                "type": "de.fabmax.kool.editor.data.ConstColorAttribute",
-                "color": {
-                  "r": 0.0,
-                  "g": 0.0,
-                  "b": 0.0,
-                  "a": 1.0
-                }
-              }
+              "type": "de.fabmax.kool.editor.data.PbrShaderData"
             }
           }
         },
@@ -3099,23 +3073,6 @@
                   "r": 0.20874742,
                   "g": 0.42032206,
                   "b": 0.6356857,
-                  "a": 1.0
-                }
-              },
-              "roughness": {
-                "type": "de.fabmax.kool.editor.data.ConstValueAttribute",
-                "value": 0.5
-              },
-              "metallic": {
-                "type": "de.fabmax.kool.editor.data.ConstValueAttribute",
-                "value": 0.0
-              },
-              "emission": {
-                "type": "de.fabmax.kool.editor.data.ConstColorAttribute",
-                "color": {
-                  "r": 0.0,
-                  "g": 0.0,
-                  "b": 0.0,
                   "a": 1.0
                 }
               }
@@ -3150,23 +3107,6 @@
                   "r": 0.065871656,
                   "g": 0.34879714,
                   "b": 0.8206002,
-                  "a": 1.0
-                }
-              },
-              "roughness": {
-                "type": "de.fabmax.kool.editor.data.ConstValueAttribute",
-                "value": 0.5
-              },
-              "metallic": {
-                "type": "de.fabmax.kool.editor.data.ConstValueAttribute",
-                "value": 0.0
-              },
-              "emission": {
-                "type": "de.fabmax.kool.editor.data.ConstColorAttribute",
-                "color": {
-                  "r": 0.0,
-                  "g": 0.0,
-                  "b": 0.0,
                   "a": 1.0
                 }
               }
@@ -3207,19 +3147,6 @@
               "roughness": {
                 "type": "de.fabmax.kool.editor.data.ConstValueAttribute",
                 "value": 0.35999998
-              },
-              "metallic": {
-                "type": "de.fabmax.kool.editor.data.ConstValueAttribute",
-                "value": 0.0
-              },
-              "emission": {
-                "type": "de.fabmax.kool.editor.data.ConstColorAttribute",
-                "color": {
-                  "r": 0.0,
-                  "g": 0.0,
-                  "b": 0.0,
-                  "a": 1.0
-                }
               }
             }
           }
@@ -3262,15 +3189,6 @@
               "metallic": {
                 "type": "de.fabmax.kool.editor.data.ConstValueAttribute",
                 "value": 1.0
-              },
-              "emission": {
-                "type": "de.fabmax.kool.editor.data.ConstColorAttribute",
-                "color": {
-                  "r": 0.0,
-                  "g": 0.0,
-                  "b": 0.0,
-                  "a": 1.0
-                }
               }
             }
           }
@@ -3303,23 +3221,6 @@
                   "r": 0.5386688,
                   "g": 0.7145252,
                   "b": 0.2589523,
-                  "a": 1.0
-                }
-              },
-              "roughness": {
-                "type": "de.fabmax.kool.editor.data.ConstValueAttribute",
-                "value": 0.5
-              },
-              "metallic": {
-                "type": "de.fabmax.kool.editor.data.ConstValueAttribute",
-                "value": 0.0
-              },
-              "emission": {
-                "type": "de.fabmax.kool.editor.data.ConstColorAttribute",
-                "color": {
-                  "r": 0.0,
-                  "g": 0.0,
-                  "b": 0.0,
                   "a": 1.0
                 }
               }
@@ -3356,23 +3257,6 @@
                   "b": 0.004304338,
                   "a": 1.0
                 }
-              },
-              "roughness": {
-                "type": "de.fabmax.kool.editor.data.ConstValueAttribute",
-                "value": 0.5
-              },
-              "metallic": {
-                "type": "de.fabmax.kool.editor.data.ConstValueAttribute",
-                "value": 0.0
-              },
-              "emission": {
-                "type": "de.fabmax.kool.editor.data.ConstColorAttribute",
-                "color": {
-                  "r": 0.0,
-                  "g": 0.0,
-                  "b": 0.0,
-                  "a": 1.0
-                }
               }
             }
           }
@@ -3401,23 +3285,6 @@
               "baseColor": {
                 "type": "de.fabmax.kool.editor.data.MapAttribute",
                 "mapPath": "/textures/materials/tile_flat/tiles_flat_fine.png"
-              },
-              "roughness": {
-                "type": "de.fabmax.kool.editor.data.ConstValueAttribute",
-                "value": 0.5
-              },
-              "metallic": {
-                "type": "de.fabmax.kool.editor.data.ConstValueAttribute",
-                "value": 0.0
-              },
-              "emission": {
-                "type": "de.fabmax.kool.editor.data.ConstColorAttribute",
-                "color": {
-                  "r": 0.0,
-                  "g": 0.0,
-                  "b": 0.0,
-                  "a": 1.0
-                }
               },
               "normalMap": {
                 "mapPath": "/textures/materials/tile_flat/tiles_flat_fine_normal.png"
@@ -3458,23 +3325,6 @@
                   "b": 0.63080025,
                   "a": 1.0
                 }
-              },
-              "roughness": {
-                "type": "de.fabmax.kool.editor.data.ConstValueAttribute",
-                "value": 0.5
-              },
-              "metallic": {
-                "type": "de.fabmax.kool.editor.data.ConstValueAttribute",
-                "value": 0.0
-              },
-              "emission": {
-                "type": "de.fabmax.kool.editor.data.ConstColorAttribute",
-                "color": {
-                  "r": 0.0,
-                  "g": 0.0,
-                  "b": 0.0,
-                  "a": 1.0
-                }
               }
             }
           }
@@ -3507,23 +3357,6 @@
                   "r": 0.730807,
                   "g": 0.0028061299,
                   "b": 0.32738853,
-                  "a": 1.0
-                }
-              },
-              "roughness": {
-                "type": "de.fabmax.kool.editor.data.ConstValueAttribute",
-                "value": 0.5
-              },
-              "metallic": {
-                "type": "de.fabmax.kool.editor.data.ConstValueAttribute",
-                "value": 0.0
-              },
-              "emission": {
-                "type": "de.fabmax.kool.editor.data.ConstColorAttribute",
-                "color": {
-                  "r": 0.0,
-                  "g": 0.0,
-                  "b": 0.0,
                   "a": 1.0
                 }
               }
@@ -3559,23 +3392,6 @@
                   "b": 0.32656938,
                   "a": 1.0
                 }
-              },
-              "roughness": {
-                "type": "de.fabmax.kool.editor.data.ConstValueAttribute",
-                "value": 0.5
-              },
-              "metallic": {
-                "type": "de.fabmax.kool.editor.data.ConstValueAttribute",
-                "value": 0.0
-              },
-              "emission": {
-                "type": "de.fabmax.kool.editor.data.ConstColorAttribute",
-                "color": {
-                  "r": 0.0,
-                  "g": 0.0,
-                  "b": 0.0,
-                  "a": 1.0
-                }
               }
             }
           }
@@ -3608,23 +3424,6 @@
                   "r": 0.1614875,
                   "g": 0.03306905,
                   "b": 0.5384727,
-                  "a": 1.0
-                }
-              },
-              "roughness": {
-                "type": "de.fabmax.kool.editor.data.ConstValueAttribute",
-                "value": 0.5
-              },
-              "metallic": {
-                "type": "de.fabmax.kool.editor.data.ConstValueAttribute",
-                "value": 0.0
-              },
-              "emission": {
-                "type": "de.fabmax.kool.editor.data.ConstColorAttribute",
-                "color": {
-                  "r": 0.0,
-                  "g": 0.0,
-                  "b": 0.0,
                   "a": 1.0
                 }
               }
@@ -3668,15 +3467,6 @@
               "metallic": {
                 "type": "de.fabmax.kool.editor.data.ConstValueAttribute",
                 "value": 1.0
-              },
-              "emission": {
-                "type": "de.fabmax.kool.editor.data.ConstColorAttribute",
-                "color": {
-                  "r": 0.0,
-                  "g": 0.0,
-                  "b": 0.0,
-                  "a": 1.0
-                }
               }
             }
           }
@@ -3719,15 +3509,6 @@
               "metallic": {
                 "type": "de.fabmax.kool.editor.data.ConstValueAttribute",
                 "value": 1.0
-              },
-              "emission": {
-                "type": "de.fabmax.kool.editor.data.ConstColorAttribute",
-                "color": {
-                  "r": 0.0,
-                  "g": 0.0,
-                  "b": 0.0,
-                  "a": 1.0
-                }
               }
             }
           }
@@ -3770,15 +3551,6 @@
               "metallic": {
                 "type": "de.fabmax.kool.editor.data.ConstValueAttribute",
                 "value": 1.0
-              },
-              "emission": {
-                "type": "de.fabmax.kool.editor.data.ConstColorAttribute",
-                "color": {
-                  "r": 0.0,
-                  "g": 0.0,
-                  "b": 0.0,
-                  "a": 1.0
-                }
               }
             }
           }
@@ -3811,23 +3583,6 @@
                   "r": 1.0,
                   "g": 0.49873802,
                   "b": 0.025683772,
-                  "a": 1.0
-                }
-              },
-              "roughness": {
-                "type": "de.fabmax.kool.editor.data.ConstValueAttribute",
-                "value": 0.5
-              },
-              "metallic": {
-                "type": "de.fabmax.kool.editor.data.ConstValueAttribute",
-                "value": 0.0
-              },
-              "emission": {
-                "type": "de.fabmax.kool.editor.data.ConstColorAttribute",
-                "color": {
-                  "r": 0.0,
-                  "g": 0.0,
-                  "b": 0.0,
                   "a": 1.0
                 }
               }

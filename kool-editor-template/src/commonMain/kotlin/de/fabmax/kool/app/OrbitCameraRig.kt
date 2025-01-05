@@ -71,8 +71,6 @@ class OrbitCameraRig : KoolBehavior() {
         val camera = camera ?: return
 
         orbitCam = OrbitInputTransform(gameEntity.name).also { orbitCam ->
-            orbitCam.isKeepingStandardTransform = true
-
             camera.attachCameraToNode(orbitCam)
             camera.camera.transform.setIdentity().translate(0f, 0f, 1f)
             scene.sceneComponent.sceneNode.addNode(orbitCam)
@@ -92,6 +90,6 @@ class OrbitCameraRig : KoolBehavior() {
         orbitCam.maxHorizontalRot = maxPitch
 
         orbitCam.setZoom(zoom)
-        orbitCam.setMouseRotation(initYaw, initPitch)
+        orbitCam.setRotation(initYaw, initPitch)
     }
 }

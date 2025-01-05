@@ -28,15 +28,6 @@
           "metallic": {
             "type": "de.fabmax.kool.editor.data.ConstValueAttribute",
             "value": 1.0
-          },
-          "emission": {
-            "type": "de.fabmax.kool.editor.data.ConstColorAttribute",
-            "color": {
-              "r": 0.0,
-              "g": 0.0,
-              "b": 0.0,
-              "a": 1.0
-            }
           }
         }
       }

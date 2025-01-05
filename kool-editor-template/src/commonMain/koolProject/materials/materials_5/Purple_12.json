@@ -20,23 +20,6 @@
               "b": 0.5384727,
               "a": 1.0
             }
-          },
-          "roughness": {
-            "type": "de.fabmax.kool.editor.data.ConstValueAttribute",
-            "value": 0.5
-          },
-          "metallic": {
-            "type": "de.fabmax.kool.editor.data.ConstValueAttribute",
-            "value": 0.0
-          },
-          "emission": {
-            "type": "de.fabmax.kool.editor.data.ConstColorAttribute",
-            "color": {
-              "r": 0.0,
-              "g": 0.0,
-              "b": 0.0,
-              "a": 1.0
-            }
           }
         }
       }
