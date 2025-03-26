@@ -1,9 +1,10 @@
+import org.gradle.internal.os.OperatingSystem
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalDistributionDsl
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
 plugins {
-    kotlin("multiplatform") version "2.1.0"
+    kotlin("multiplatform") version "2.1.20"
 }
 
 repositories {
@@ -12,9 +13,18 @@ repositories {
 }
 
 kotlin {
-    // kotlin multiplatform (jvm + js) setup:
-    jvm { }
-    jvmToolchain(11)
+    jvm {
+        @OptIn(ExperimentalKotlinGradlePluginApi::class)
+        binaries {
+            executable {
+                mainClass.set("LauncherKt")
+                if (OperatingSystem.current().isMacOsX) {
+                    applicationDefaultJvmArgs = listOf("-XstartOnFirstThread")
+                }
+            }
+        }
+    }
+    jvmToolchain(21)
 
     js {
         binaries.executable()
@@ -35,9 +45,9 @@ kotlin {
     }
     
     sourceSets {
-        val koolVersion = "0.16.0"
-        val lwjglVersion = "3.3.5"
-        val physxJniVersion = "2.4.0"
+        val koolVersion = "0.17.0"
+        val lwjglVersion = "3.3.6"
+        val physxJniVersion = "2.6.0"
 
         // JVM target platforms, you can remove entries from the list in case you want to target
         // only a specific platform
@@ -78,52 +88,6 @@ kotlin {
             }
         }
     }
-}
-
-task("runnableJar", Jar::class) {
-    dependsOn("jvmJar")
-
-    group = "app"
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    archiveAppendix.set("runnable")
-    manifest {
-        attributes["Main-Class"] = "LauncherKt"
-    }
-
-    configurations
-        .asSequence()
-        .filter { it.name.startsWith("common") || it.name.startsWith("jvm") }
-        .map { it.copyRecursive().fileCollection { true } }
-        .flatten()
-        .distinct()
-        .filter { it.exists() }
-        .map { if (it.isDirectory) it else zipTree(it) }
-        .forEach { from(it) }
-    from(layout.buildDirectory.files("classes/kotlin/jvm/main"))
-
-    doLast {
-        copy {
-            from(layout.buildDirectory.file("libs/${archiveBaseName.get()}-runnable.jar"))
-            into("${rootDir}/dist/jvm")
-        }
-    }
-}
-
-task("runApp", JavaExec::class) {
-    group = "app"
-    dependsOn("jvmMainClasses")
-
-    classpath = layout.buildDirectory.files("classes/kotlin/jvm/main")
-    configurations
-        .filter { it.name.startsWith("common") || it.name.startsWith("jvm") }
-        .map { it.copyRecursive().filter { true } }
-        .forEach { classpath += it }
-
-    mainClass.set("LauncherKt")
-}
-
-val build by tasks.getting(Task::class) {
-    dependsOn("runnableJar")
 }
 
 val clean by tasks.getting(Task::class) {

@@ -1,53 +1,70 @@
 package template
 
+import de.fabmax.kool.Assets
 import de.fabmax.kool.KoolContext
+import de.fabmax.kool.loadTexture2d
 import de.fabmax.kool.math.Vec3f
 import de.fabmax.kool.math.deg
+import de.fabmax.kool.modules.gltf.GltfLoadConfig
+import de.fabmax.kool.modules.gltf.GltfMaterialConfig
+import de.fabmax.kool.modules.gltf.loadGltfModel
 import de.fabmax.kool.modules.ksl.KslPbrShader
-import de.fabmax.kool.scene.addColorMesh
+import de.fabmax.kool.pipeline.ao.AoPipeline
+import de.fabmax.kool.scene.addTextureMesh
 import de.fabmax.kool.scene.defaultOrbitCamera
 import de.fabmax.kool.scene.scene
 import de.fabmax.kool.util.Color
+import de.fabmax.kool.util.SimpleShadowMap
 import de.fabmax.kool.util.Time
-import de.fabmax.kool.util.debugOverlay
+import de.fabmax.kool.util.launchOnMainThread
 
 /**
  * Main application entry. This demo creates a small example scene, which you probably want to replace by your actual
  * game / application content.
  */
-fun launchApp(ctx: KoolContext) {
-    // add a hello-world demo scene
+fun launchApp(ctx: KoolContext) = launchOnMainThread {
     ctx.scenes += scene {
-        // enable simple camera mouse control
         defaultOrbitCamera()
 
-        // add a spinning color cube to the scene
-        addColorMesh {
+        // Light setup
+        lighting.singleSpotLight {
+            setup(Vec3f(5f, 6.25f, 7.5f), Vec3f(-1f, -1.25f, -1.5f), 45f.deg)
+            setColor(Color.WHITE, 300f)
+        }
+        val shadowMap = SimpleShadowMap(this, lighting.lights[0])
+        val aoPipeline = AoPipeline.createForward(this)
+
+        // Add a textured ground plane
+        val texture = Assets.loadTexture2d("kool-test-tex.png").getOrThrow()
+        addTextureMesh {
             generate {
-                // called once on init: generates a cube with different (vertex-)colors assigned to each side
-                cube {
-                    colored()
-                }
+                grid { }
             }
-            onUpdate {
-                // called on each frame: spins the cube around its x-axis by 45 degrees per second
-                transform.rotate(45f.deg * Time.deltaT, Vec3f.X_AXIS)
-            }
-            // assign a shader, which uses the vertex color info
             shader = KslPbrShader {
-                color { vertexColor() }
-                metallic(0f)
-                roughness(0.25f)
+                color { textureColor(texture) }
+                lighting { addShadowMap(shadowMap) }
+                enableSsao(aoPipeline.aoMap)
             }
         }
 
-        // set up a single light source
-        lighting.singleDirectionalLight {
-            setup(Vec3f(-1f, -1f, -1f))
-            setColor(Color.WHITE, 5f)
-        }
-    }
+        // Load a glTF 2.0 model
+        val materialCfg = GltfMaterialConfig(
+            shadowMaps = listOf(shadowMap),
+            scrSpcAmbientOcclusionMap = aoPipeline.aoMap,
 
-    // add the debugOverlay. provides an fps counter and some additional debug info
-    ctx.scenes += debugOverlay()
+        )
+        val modelCfg = GltfLoadConfig(materialConfig = materialCfg)
+        val model = Assets.loadGltfModel("BoxAnimated.gltf", modelCfg).getOrThrow()
+
+        model.transform.translate(0f, 0.5f, 0f)
+        if (model.animations.isNotEmpty()) {
+            model.enableAnimation(0)
+            model.onUpdate {
+                model.applyAnimation(Time.deltaT)
+            }
+        }
+
+        // Add loaded model to scene
+        addNode(model)
+    }
 }

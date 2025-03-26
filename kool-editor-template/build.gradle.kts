@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalDistributionDsl
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
 plugins {
-    kotlin("multiplatform") version "2.1.0"
+    kotlin("multiplatform") version "2.1.20"
 }
 
 repositories {
@@ -15,7 +15,7 @@ kotlin {
     jvm {
         compilations.create("editor")
     }
-    jvmToolchain(11)
+    jvmToolchain(21)
 
     js {
         binaries.executable()
@@ -36,9 +36,9 @@ kotlin {
     }
 
     sourceSets {
-        val koolVersion = "0.16.0"
-        val lwjglVersion = "3.3.5"
-        val physxJniVersion = "2.5.0"
+        val koolVersion = "0.17.0"
+        val lwjglVersion = "3.3.6"
+        val physxJniVersion = "2.6.0"
 
         // JVM target platforms, you can remove entries from the list in case you want to target
         // only a specific platform
@@ -111,6 +111,9 @@ task("runEditor", JavaExec::class) {
         .forEach { classpath += it }
 
     mainClass.set("EditorLauncherKt")
+    if (org.gradle.internal.os.OperatingSystem.current().isMacOsX) {
+        jvmArgs = listOf("-XstartOnFirstThread")
+    }
     workingDir = File(projectDir, ".editor")
     if (!workingDir.exists()) {
         workingDir.mkdir()
@@ -128,4 +131,7 @@ task("runApp", JavaExec::class) {
         .forEach { classpath += it }
 
     mainClass.set("de.fabmax.kool.app.AppLauncherKt")
+    if (org.gradle.internal.os.OperatingSystem.current().isMacOsX) {
+        jvmArgs = listOf("-XstartOnFirstThread")
+    }
 }
