@@ -1,12 +1,14 @@
+import org.gradle.internal.os.OperatingSystem
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalDistributionDsl
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
 plugins {
-    kotlin("multiplatform") version "2.1.20"
+    kotlin("multiplatform") version "2.2.20"
 }
 
 repositories {
+    mavenLocal()
     mavenCentral()
     maven("https://oss.sonatype.org/content/repositories/snapshots")
 }
@@ -14,6 +16,19 @@ repositories {
 kotlin {
     jvm {
         compilations.create("editor")
+        @OptIn(ExperimentalKotlinGradlePluginApi::class)
+        binaries {
+            executable {
+                mainClass.set("de.fabmax.kool.app.AppLauncherKt")
+                applicationDefaultJvmArgs = buildList {
+                    add("--add-opens=java.base/java.lang=ALL-UNNAMED")
+                    add("--enable-native-access=ALL-UNNAMED")
+                    if (OperatingSystem.current().isMacOsX) {
+                        add("-XstartOnFirstThread")
+                    }
+                }
+            }
+        }
     }
     jvmToolchain(21)
 
@@ -100,38 +115,29 @@ tasks["clean"].doLast {
     delete("${projectDir}/dist/js")
 }
 
-task("runEditor", JavaExec::class) {
-    group = "editor"
+tasks.register<JavaExec>("runEditor") {
     dependsOn("jvmEditorClasses")
 
-    classpath = layout.buildDirectory.files("classes/kotlin/jvm/editor")
-    configurations
-        .filter { it.name.startsWith("common") || it.name.startsWith("jvm") }
-        .map { it.copyRecursive().filter { true } }
-        .forEach { classpath += it }
-
+    group = "editor"
     mainClass.set("EditorLauncherKt")
-    if (org.gradle.internal.os.OperatingSystem.current().isMacOsX) {
-        jvmArgs = listOf("-XstartOnFirstThread")
-    }
     workingDir = File(projectDir, ".editor")
-    if (!workingDir.exists()) {
-        workingDir.mkdir()
+    jvmArgs = buildList {
+        add("--add-opens=java.base/java.lang=ALL-UNNAMED")
+        add("--enable-native-access=ALL-UNNAMED")
+        if (OperatingSystem.current().isMacOsX) {
+            add("-XstartOnFirstThread")
+        }
     }
-}
 
-task("runApp", JavaExec::class) {
-    group = "app"
-    dependsOn("jvmMainClasses")
-
-    classpath = layout.buildDirectory.files("classes/kotlin/jvm/main")
-    configurations
-        .filter { it.name.startsWith("common") || it.name.startsWith("jvm") }
-        .map { it.copyRecursive().filter { true } }
-        .forEach { classpath += it }
-
-    mainClass.set("de.fabmax.kool.app.AppLauncherKt")
-    if (org.gradle.internal.os.OperatingSystem.current().isMacOsX) {
-        jvmArgs = listOf("-XstartOnFirstThread")
+    kotlin {
+        val main = targets["jvm"].compilations["main"]
+        val editor = targets["jvm"].compilations["editor"]
+        dependsOn(main.compileAllTaskName, editor.compileAllTaskName)
+        classpath(
+            main.output.allOutputs.files,
+            editor.output.allOutputs.files,
+            configurations["jvmEditorRuntimeClasspath"],
+            configurations["jvmRuntimeClasspath"]
+        )
     }
 }

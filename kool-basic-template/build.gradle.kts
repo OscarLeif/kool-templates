@@ -4,7 +4,7 @@ import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalDistributionDsl
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
 plugins {
-    kotlin("multiplatform") version "2.1.20"
+    kotlin("multiplatform") version "2.2.20"
 }
 
 repositories {
@@ -18,8 +18,12 @@ kotlin {
         binaries {
             executable {
                 mainClass.set("LauncherKt")
-                if (OperatingSystem.current().isMacOsX) {
-                    applicationDefaultJvmArgs = listOf("-XstartOnFirstThread")
+                applicationDefaultJvmArgs = buildList {
+                    add("--add-opens=java.base/java.lang=ALL-UNNAMED")
+                    add("--enable-native-access=ALL-UNNAMED")
+                    if (OperatingSystem.current().isMacOsX) {
+                        add("-XstartOnFirstThread")
+                    }
                 }
             }
         }
@@ -60,7 +64,7 @@ kotlin {
                 implementation("de.fabmax.kool:kool-core:$koolVersion")
                 implementation("de.fabmax.kool:kool-physics:$koolVersion")
 
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
             }
         }
 
