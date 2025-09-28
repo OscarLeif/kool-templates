@@ -51,9 +51,9 @@ kotlin {
     }
 
     sourceSets {
-        val koolVersion = "0.17.0"
+        val koolVersion = "0.18.0"
         val lwjglVersion = "3.3.6"
-        val physxJniVersion = "2.6.0"
+        val physxJniVersion = "2.6.1"
 
         // JVM target platforms, you can remove entries from the list in case you want to target
         // only a specific platform

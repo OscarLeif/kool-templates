@@ -23,7 +23,7 @@ import de.fabmax.kool.scene.scene
 import de.fabmax.kool.util.DebugOverlay
 import de.fabmax.kool.util.MdColor
 import de.fabmax.kool.util.Time
-import de.fabmax.kool.util.launchOnMainThread
+import kotlinx.coroutines.launch
 import kotlin.math.sin
 
 class MainActivity : Activity() {
@@ -65,7 +65,7 @@ class MainActivity : Activity() {
     }
 
     private fun testScene() = scene {
-        launchOnMainThread {
+        coroutineScope.launch {
             defaultOrbitCamera()
 
             val ibl = loadHdri("shanghai_bund_1k.rgbe.png")

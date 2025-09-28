@@ -14,15 +14,16 @@ import de.fabmax.kool.scene.addTextureMesh
 import de.fabmax.kool.scene.defaultOrbitCamera
 import de.fabmax.kool.scene.scene
 import de.fabmax.kool.util.Color
+import de.fabmax.kool.util.FrontendScope
 import de.fabmax.kool.util.SimpleShadowMap
 import de.fabmax.kool.util.Time
-import de.fabmax.kool.util.launchOnMainThread
+import kotlinx.coroutines.launch
 
 /**
  * Main application entry. This demo creates a small example scene, which you probably want to replace by your actual
  * game / application content.
  */
-fun launchApp(ctx: KoolContext) = launchOnMainThread {
+fun launchApp(ctx: KoolContext) = FrontendScope.launch {
     ctx.scenes += scene {
         defaultOrbitCamera()
 
