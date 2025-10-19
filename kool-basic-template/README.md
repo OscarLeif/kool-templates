@@ -24,21 +24,20 @@ unfortunately, documentation is still barely existing (but you are welcome to co
 
 ## How to run
 
-You can start the project right away out of your IDE or via gradle from a terminal inside the `kool-basic-template`
+You can start the project right away out of your IDE or via Gradle from a terminal inside the `kool-basic-template`
 directory:
 ```shell
-./gradlew runApp
+./gradlew runJvm
 ```
 
 ## How to package
 
-In case you want to distribute your game, running it via gradle or out of the IDE isn't really an option. Therefore,
+In case you want to distribute your game, running it via Gradle or out of the IDE isn't really an option. Therefore,
 the task
 ```shell
 ./gradlew build
 ```
-creates two (very basic) distributions for JVM and Javascript located under `dist/jvm` and `dist/js`. In order to
-start the Javascript version you will need some sort of web-server. Double-clicking the `index.html` in the explorer
-won't do the trick (because of browser security restrictions). However, IntelliJ comes with a built-in webserver, so
-you can simply open the `index.html` in IntelliJ and click on your favourite browser icon in the upper right corner of
-the editor.
+creates two (very basic) distributions for JVM and JavaScript. The jvm distribution is packaged as a zip / tar file
+under `build/distributions/kool-basic-template-jvm.zip`. The js distribution is located under `dist/js` where it can be
+run using IntelliJ's built-in webserver: Open the `index.html` file in the project tree inside IntelliJ and click on
+your favourite browser icon in the upper right corner of the editor. It should open a browser tab displaying the game.

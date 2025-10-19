@@ -1,5 +1,6 @@
 import de.fabmax.kool.KoolApplication
 import de.fabmax.kool.KoolConfigJs
+import de.fabmax.kool.NativeAssetLoader
 import template.launchApp
 
 /**
@@ -8,7 +9,8 @@ import template.launchApp
  */
 fun main() = KoolApplication(
     config = KoolConfigJs(
-        canvasName = "glCanvas"
+        canvasName = "glCanvas",
+        defaultAssetLoader = NativeAssetLoader(".")
     )
 ) {
     launchApp(ctx)

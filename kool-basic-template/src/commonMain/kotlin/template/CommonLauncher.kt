@@ -13,10 +13,7 @@ import de.fabmax.kool.pipeline.ao.AoPipeline
 import de.fabmax.kool.scene.addTextureMesh
 import de.fabmax.kool.scene.defaultOrbitCamera
 import de.fabmax.kool.scene.scene
-import de.fabmax.kool.util.Color
-import de.fabmax.kool.util.FrontendScope
-import de.fabmax.kool.util.SimpleShadowMap
-import de.fabmax.kool.util.Time
+import de.fabmax.kool.util.*
 import kotlinx.coroutines.launch
 
 /**
@@ -35,8 +32,9 @@ fun launchApp(ctx: KoolContext) = FrontendScope.launch {
         val shadowMap = SimpleShadowMap(this, lighting.lights[0])
         val aoPipeline = AoPipeline.createForward(this)
 
-        // Add a textured ground plane
-        val texture = Assets.loadTexture2d("kool-test-tex.png").getOrThrow()
+        // Add a textured ground plane. Textures and other resources are located under src/commonMain/resources/assets.
+        val texture = Assets.loadTexture2d("assets/kool-test-tex.png").getOrThrow()
+            .also { it.releaseWith(this) }  // Release the texture together with the scene
         addTextureMesh {
             generate {
                 grid { }
@@ -55,7 +53,7 @@ fun launchApp(ctx: KoolContext) = FrontendScope.launch {
 
         )
         val modelCfg = GltfLoadConfig(materialConfig = materialCfg)
-        val model = Assets.loadGltfModel("BoxAnimated.gltf", modelCfg).getOrThrow()
+        val model = Assets.loadGltfModel("assets/BoxAnimated.gltf", modelCfg).getOrThrow()
 
         model.transform.translate(0f, 0.5f, 0f)
         if (model.animations.isNotEmpty()) {
@@ -68,4 +66,7 @@ fun launchApp(ctx: KoolContext) = FrontendScope.launch {
         // Add loaded model to scene
         addNode(model)
     }
+
+    // Add a small debug overlay for displaying the current fps and other stats
+    ctx.scenes += debugOverlay()
 }
