@@ -1,0 +1,84 @@
+package de.fabmax.koolintellijtemplate
+
+import de.fabmax.kool.*
+import de.fabmax.kool.math.Vec3f
+import de.fabmax.kool.math.deg
+import de.fabmax.kool.modules.gltf.GltfLoadConfig
+import de.fabmax.kool.modules.gltf.GltfMaterialConfig
+import de.fabmax.kool.modules.gltf.loadGltfModel
+import de.fabmax.kool.modules.ksl.KslPbrShader
+import de.fabmax.kool.pipeline.ao.AoPipeline
+import de.fabmax.kool.pipeline.backend.vk.ColorSpace
+import de.fabmax.kool.pipeline.backend.vk.RenderBackendVk
+import de.fabmax.kool.pipeline.backend.vk.VkSetup
+import de.fabmax.kool.platform.swing.SwingWindowSubsystem
+import de.fabmax.kool.scene.addTextureMesh
+import de.fabmax.kool.scene.defaultOrbitCamera
+import de.fabmax.kool.util.*
+import java.awt.Canvas
+
+internal object KoolService {
+    private val koolCanvas = Canvas()
+    val koolPanel = KoolPanel(koolCanvas)
+
+    fun initKool() {
+        KoolApplication(
+            config = KoolConfigJvm(
+                renderBackend = RenderBackendVk,
+                vkSetup = VkSetup(preferredColorSpace = ColorSpace.AdobeRGB),
+                windowSubsystem = SwingWindowSubsystem(
+                    providedCanvas = koolCanvas,
+                    makeFocusable = false,
+                    onCreated = { koolPanel.forceUpdateLayout() }
+                )
+            )
+        ) {
+            addScene {
+                defaultOrbitCamera()
+
+                // Light setup
+                lighting.singleSpotLight {
+                    setup(Vec3f(5f, 6.25f, 7.5f), Vec3f(-1f, -1.25f, -1.5f), 45f.deg)
+                    setColor(Color.WHITE, 300f)
+                }
+                val shadowMap = SimpleShadowMap(this, lighting.lights[0])
+                val aoPipeline = AoPipeline.createForward(this)
+
+                // Add a textured ground plane. Textures and other resources are located under src/commonMain/resources/assets.
+                val texture = Assets.loadTexture2d("assets/kool-test-tex.png").getOrThrow()
+                    .also { it.releaseWith(this) }  // Release the texture together with the scene
+                addTextureMesh {
+                    generate {
+                        grid { }
+                    }
+                    shader = KslPbrShader {
+                        color { textureColor(texture) }
+                        lighting { addShadowMap(shadowMap) }
+                        enableSsao(aoPipeline.aoMap)
+                    }
+                }
+
+                // Load a glTF 2.0 model
+                val materialCfg = GltfMaterialConfig(
+                    shadowMaps = listOf(shadowMap),
+                    scrSpcAmbientOcclusionMap = aoPipeline.aoMap,
+
+                    )
+                val modelCfg = GltfLoadConfig(materialConfig = materialCfg)
+                val model = Assets.loadGltfModel("assets/BoxAnimated.gltf", modelCfg).getOrThrow()
+
+                model.transform.translate(0f, 0.5f, 0f)
+                if (model.animations.isNotEmpty()) {
+                    model.enableAnimation(0)
+                    model.onUpdate {
+                        model.applyAnimation(Time.deltaT)
+                    }
+                }
+
+                // Add loaded model to scene
+                addNode(model)
+            }
+            ctx.scenes += debugOverlay()
+        }
+    }
+}

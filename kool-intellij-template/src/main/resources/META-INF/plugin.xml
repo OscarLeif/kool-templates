@@ -1,0 +1,13 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <id>de.fabmax.intellijkool</id>
+    <name>kool-intellij-template</name>
+    <vendor>fabmax</vendor>
+
+    <depends>com.intellij.modules.platform</depends>
+
+    <actions>
+        <action id="de.fabmax.koolintellijtemplate.OpenKoolTabAction"
+                class="de.fabmax.koolintellijtemplate.OpenKoolTabAction" text="Open Kool Tab"/>
+    </actions>
+</idea-plugin>
