@@ -10,7 +10,7 @@ plugins {
 repositories {
     mavenLocal()
     mavenCentral()
-    maven("https://oss.sonatype.org/content/repositories/snapshots")
+    maven("https://central.sonatype.com/repository/maven-snapshots")
 }
 
 kotlin {
@@ -51,7 +51,7 @@ kotlin {
     }
 
     sourceSets {
-        val koolVersion = "0.18.0"
+        val koolVersion = "0.19.0"
         val lwjglVersion = "3.3.6"
         val physxJniVersion = "2.6.1"
 

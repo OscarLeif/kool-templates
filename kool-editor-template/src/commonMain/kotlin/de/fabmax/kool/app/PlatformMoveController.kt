@@ -56,7 +56,9 @@ class PlatformMoveController : KoolBehavior() {
         }
 
         val pose = Mat4f.translation(posA + dir * progress)
-        actor.setKinematicTarget(pose)
+        if (actor.isAttachedToSimulation) {
+            actor.setKinematicTarget(pose)
+        }
     }
 
     private fun speedRamp(dist: Float): Float {

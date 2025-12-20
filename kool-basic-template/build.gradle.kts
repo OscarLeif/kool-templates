@@ -4,7 +4,7 @@ import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalDistributionDsl
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
 plugins {
-    kotlin("multiplatform") version "2.2.20"
+    kotlin("multiplatform") version "2.2.21"
 }
 
 repositories {
@@ -49,7 +49,7 @@ kotlin {
     }
     
     sourceSets {
-        val koolVersion = "0.18.0"
+        val koolVersion = "0.19.0"
         val lwjglVersion = "3.3.6"
         val physxJniVersion = "2.6.1"
 
@@ -63,6 +63,7 @@ kotlin {
 
                 implementation("de.fabmax.kool:kool-core:$koolVersion")
                 implementation("de.fabmax.kool:kool-physics:$koolVersion")
+                implementation("de.fabmax.kool:kool-physics-2d:${koolVersion}")
 
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
             }
@@ -80,8 +81,9 @@ kotlin {
                         runtimeOnly("org.lwjgl:lwjgl-$lib:$lwjglVersion:$platform")
                     }
 
-                    // physx-jni runtime libs
+                    // phyics runtime libs
                     runtimeOnly("de.fabmax:physx-jni:$physxJniVersion:$platform")
+                    runtimeOnly("de.fabmax.box2d-jni:box2d-jni:$physxJniVersion:$platform")
                 }
             }
         }

@@ -56,8 +56,9 @@ class CharacterCameraRig : KoolBehavior() {
     override fun onStart() {
         val character = trackedCharacter ?: return
         val camera = camera ?: return
+        val world = checkNotNull(gameEntity.sceneEntity.getComponent<PhysicsWorldComponent>()?.physicsWorld)
 
-        tracker = CharacterTrackingCamRig().apply {
+        tracker = CharacterTrackingCamRig(world).apply {
             trackedPose = character.localActorTransform
             pivotPoint.set(this@CharacterCameraRig.pivotPoint)
             updateObstacleAware()

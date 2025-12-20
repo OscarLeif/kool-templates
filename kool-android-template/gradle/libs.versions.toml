@@ -1,7 +1,7 @@
 [versions]
 agp = "8.12.3"
-kotlin = "2.2.20"
-kool = "0.18.0"
+kotlin = "2.2.21"
+kool = "0.19.0"
 androidsvg = "1.4"
 
 [libraries]
