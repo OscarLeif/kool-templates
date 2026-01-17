@@ -49,42 +49,18 @@ kotlin {
     }
     
     sourceSets {
-        val koolVersion = "0.19.0"
-        val lwjglVersion = "3.3.6"
-        val physxJniVersion = "2.6.1"
-
-        // JVM target platforms, you can remove entries from the list in case you want to target
-        // only a specific platform
-        val targetPlatforms = listOf("natives-windows", "natives-linux", "natives-macos", "natives-macos-arm64")
-
         val commonMain by getting {
             dependencies {
                 // add additional kotlin multi-platform dependencies here...
-
-                implementation("de.fabmax.kool:kool-core:$koolVersion")
-                implementation("de.fabmax.kool:kool-physics:$koolVersion")
-                implementation("de.fabmax.kool:kool-physics-2d:${koolVersion}")
-
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
+                implementation(libs.kool.core)
+                implementation(libs.kool.physics)
+                implementation(libs.kool.physics2d)
             }
         }
 
         val jvmMain by getting {
             dependencies {
                 // add additional jvm-specific dependencies here...
-
-                // add required runtime libraries for lwjgl and physx-jni
-                for (platform in targetPlatforms) {
-                    // lwjgl runtime libs
-                    runtimeOnly("org.lwjgl:lwjgl:$lwjglVersion:$platform")
-                    listOf("glfw", "opengl", "jemalloc", "nfd", "stb", "vma", "shaderc").forEach { lib ->
-                        runtimeOnly("org.lwjgl:lwjgl-$lib:$lwjglVersion:$platform")
-                    }
-
-                    // phyics runtime libs
-                    runtimeOnly("de.fabmax:physx-jni:$physxJniVersion:$platform")
-                    runtimeOnly("de.fabmax.box2d-jni:box2d-jni:$physxJniVersion:$platform")
-                }
             }
         }
         

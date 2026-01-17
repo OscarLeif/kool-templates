@@ -8,7 +8,6 @@ plugins {
 }
 
 repositories {
-    mavenLocal()
     mavenCentral()
     maven("https://central.sonatype.com/repository/maven-snapshots")
 }
@@ -53,7 +52,7 @@ kotlin {
     sourceSets {
         val koolVersion = "0.19.0"
         val lwjglVersion = "3.3.6"
-        val physxJniVersion = "2.6.1"
+        val physxJniVersion = "2.7.1"
 
         // JVM target platforms, you can remove entries from the list in case you want to target
         // only a specific platform
